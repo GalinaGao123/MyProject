@@ -2,8 +2,8 @@
 #carousel
   ul
     li(v-for="car in cars")
-      .item(v-show="car.show")
-        img(:src="images[$index].img")
+      .item(v-show="$index==current", transition="fade")
+        img(:src="car.img")
   button#prev(@click="previous") Previous
   button#next(@click="next") Next
 </template>
@@ -12,24 +12,28 @@
 export default {
   data () {
     return {
-      images: [
+      cars: [
         {img: '../static/11.jpg'},
         {img: '../static/22.jpg'},
         {img: '../static/33.jpg'}
       ],
-      cars: [
-        {show: true},
-        {show: false},
-        {show: false}
-      ]
+      current: 0
     }
   },
   methods: {
     previous () {
-      this.cars.push(this.cars.shift())
+      if (this.current === 0) {
+        this.current = 2
+      } else {
+        this.current--
+      }
     },
     next () {
-      this.cars.unshift(this.cars.pop())
+      if (this.current === 2) {
+        this.current = 0
+      } else {
+        this.current++
+      }
     }
   }
 }
@@ -50,4 +54,10 @@ ul
   li
     float left
     width 480px
+.fade-transition
+  transition all 0.5s ease
+  opacity 1
+.fade-enter
+.fade-leave
+  opacity 0
 </style>
