@@ -1,6 +1,24 @@
-# myProject
+# API(Use props)
 
-> A Vue.js project
+**autoPlay:**   type: boolean.
+
+**speed:**    type: number. Auto play speed
+
+**dots:**    type: boolean. 
+
+**arrows**    type: boolean.
+
+**images:**    type: array. The images you want to play
+      
+    example: 
+        images: [
+          {img: '/static/slider1.jpg'},
+          {img: '/static/slider2.jpg'},
+          {img: '/static/slider3.jpg'}
+        ]
+
+**startAt:**    type: number. Which one do you want to begin width.
+
 
 ## Build Setup
 
@@ -14,14 +32,4 @@ npm run dev
 # build for production with minification
 npm run build
 
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
