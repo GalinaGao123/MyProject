@@ -33,36 +33,49 @@ export default {
   },
   props: ['images', 'dots', 'autoPlay', 'speed', 'startAt'],
   ready () {
-    if (this.autoPlay) {
-      this.timer = window.setInterval(() => {
-        if (this.current === this.images.length - 1) {
-          this.current = 0
-        } else {
-          this.current ++
-        }
-      }, this.speed)
-    }
+    this.setAutoPlay()
   },
   beforeDestroy () {
-    this.clearInterval(this.timer)
+    this.clearTimer()
   },
   methods: {
+    setAutoPlay () {
+      if (this.autoPlay) {
+        this.timer = window.setInterval(() => {
+          if (this.current === this.images.length - 1) {
+            this.current = 0
+          } else {
+            this.current ++
+          }
+        }, this.speed)
+      }
+    },
+    clearTimer () {
+      window.clearInterval(this.timer)
+      this.timer = ''
+    },
     previous () {
+      this.clearTimer()
       if (this.current === 0) {
         this.current = 2
       } else {
         this.current--
       }
+      this.setAutoPlay()
     },
     next () {
+      this.clearTimer()
       if (this.current === 2) {
         this.current = 0
       } else {
         this.current++
       }
+      this.setAutoPlay()
     },
     changeTab (idx) {
+      this.clearTimer()
       this.current = idx
+      this.setAutoPlay()
     }
   }
 }
